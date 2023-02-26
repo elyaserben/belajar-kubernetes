@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-with-probe
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+    ports:
+    - containerPort: 80
+    livenessProbe:
+      httpGet: # tipe lainnya ada tcp dan exec
+        path: / # coba nanti ganti jadi /404, port-forwarding 8080:80, close, get pod -> ada restart, sampai jadi crashloopbackoff
+        port: 80
+      initialDelaySeconds: 5 # pertama kali mau melakukan pengecekan, kita tunggu sampai berapa detik
+      periodSeconds: 5 # pengecekan tiap 5 detik
+      timeoutSeconds: 1 # lebih dari 1 detik, dianggap gagal pengecekan
+      successThreshold: 1 # misal tadinya tidak sehat, mau dicek berapa kali sampai dianggap sehat
+      failureThreshold: 3 # berapa kali pengecekan gagal hingga dianggap tidak sehat

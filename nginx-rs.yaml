@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: ReplicaSet # kindnya ada sendiri, beda dari RC
+metadata:
+  name: nginx
+spec:
+  replicas: 3
+  selector:
+    matchLabels: # ada match labelsnya
+      app: nginx
+  template:
+    metadata:
+      name: nginx
+      labels:
+        app: nginx # sama seperti selector
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+        ports:
+        - containerPort: 80
+

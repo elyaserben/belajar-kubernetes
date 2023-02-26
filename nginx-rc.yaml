@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: nginx-rc # RC bisa ditempelkan label & annotation
+spec:
+  replicas: 3 # jumlah pod yg akan dibuat
+  selector: # digunakan RC untuk men-select pod
+    app: nginx # sama seperti label di pod
+  template:
+    metadata:
+      name: nginx # nanti namanya tidak akan sama, ditambahkan kode unique
+      labels:
+        app: nginx # sama seperti selector
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+        ports:
+        - containerPort: 80
