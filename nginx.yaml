@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: nginx
+  name: nginx # nama pod, nama pod harus unique
 spec:
   containers:
-  - name: nginx
-    image: nginx
+  - name: nginx # nama container, tidak harus unique karena hidup di dalam pod
+    image: nginx # image yang digunakan, disini digunakan nginx
     ports:
     - containerPort: 80
